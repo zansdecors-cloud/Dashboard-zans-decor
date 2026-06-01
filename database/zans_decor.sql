@@ -1,0 +1,40 @@
+CREATE DATABASE IF NOT EXISTS zans_decor;
+USE zans_decor;
+
+CREATE TABLE users (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ username VARCHAR(100) NOT NULL,
+ password VARCHAR(255) NOT NULL,
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE produk (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ nama_produk VARCHAR(255) NOT NULL,
+ modal DECIMAL(12,2) DEFAULT 0,
+ harga_jual DECIMAL(12,2) DEFAULT 0,
+ stok INT DEFAULT 0,
+ foto VARCHAR(255),
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE orderan (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ nama_produk VARCHAR(255),
+ qty INT DEFAULT 1,
+ total DECIMAL(12,2) DEFAULT 0,
+ marketplace VARCHAR(50),
+ tanggal DATE
+);
+
+CREATE TABLE iklan (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ tanggal DATE,
+ biaya_iklan DECIMAL(12,2) DEFAULT 0,
+ klik INT DEFAULT 0,
+ dilihat INT DEFAULT 0,
+ orderan INT DEFAULT 0,
+ omset DECIMAL(12,2) DEFAULT 0
+);
+
+INSERT INTO users(username,password) VALUES('admin',MD5('admin123'));
