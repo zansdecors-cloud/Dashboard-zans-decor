@@ -11,10 +11,14 @@ CREATE TABLE users (
 CREATE TABLE produk (
  id INT AUTO_INCREMENT PRIMARY KEY,
  nama_produk VARCHAR(255) NOT NULL,
+ kategori VARCHAR(100),
+ deskripsi TEXT,
  modal DECIMAL(12,2) DEFAULT 0,
+ hpp DECIMAL(12,2) DEFAULT 0,
  harga_jual DECIMAL(12,2) DEFAULT 0,
  stok INT DEFAULT 0,
  foto VARCHAR(255),
+ status_produk VARCHAR(20) DEFAULT 'aktif',
  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -23,7 +27,12 @@ CREATE TABLE orderan (
  nama_produk VARCHAR(255),
  qty INT DEFAULT 1,
  total DECIMAL(12,2) DEFAULT 0,
+ hpp DECIMAL(12,2) DEFAULT 0,
+ fee_marketplace DECIMAL(12,2) DEFAULT 0,
+ biaya_pengiriman DECIMAL(12,2) DEFAULT 0,
+ laba DECIMAL(12,2) DEFAULT 0,
  marketplace VARCHAR(50),
+ status_order VARCHAR(50) DEFAULT 'baru',
  tanggal DATE
 );
 
@@ -34,7 +43,24 @@ CREATE TABLE iklan (
  klik INT DEFAULT 0,
  dilihat INT DEFAULT 0,
  orderan INT DEFAULT 0,
- omset DECIMAL(12,2) DEFAULT 0
+ omset DECIMAL(12,2) DEFAULT 0,
+ roas DECIMAL(10,2) DEFAULT 0
+);
+
+CREATE TABLE pengeluaran (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ tanggal DATE,
+ kategori VARCHAR(100),
+ keterangan TEXT,
+ nominal DECIMAL(12,2),
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE galeri_produk (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ produk_id INT,
+ gambar VARCHAR(255),
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO users(username,password) VALUES('admin',MD5('admin123'));
